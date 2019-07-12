@@ -1,0 +1,19 @@
+{
+  "name": "twdb-yelpcamp",
+  "version": "0.0.1",
+  "description": "Final project from Colt Steele's 'The Web Developer Bootcamp' on Udemy. Code is based on his code alongs but all code in this project is written by me and has/will have my own flavor to make it distinct from his.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aDevCalledAlex/YelpCamp.git"
+  },
+  "author": "Alex Passidomo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aDevCalledAlex/YelpCamp/issues"
+  },
+  "homepage": "https://github.com/aDevCalledAlex/YelpCamp#readme"
+}
