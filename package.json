@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/aDevCalledAlex/YelpCamp/issues"
   },
-  "homepage": "https://github.com/aDevCalledAlex/YelpCamp#readme"
+  "homepage": "https://github.com/aDevCalledAlex/YelpCamp#readme",
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
 }
