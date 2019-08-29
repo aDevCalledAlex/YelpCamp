@@ -1,48 +1,33 @@
-const rp = require('request-promise'),
-      express = require('express'),
-      app = express(),
-      bodyParser = require('body-parser'),
-      port = 3000;
-      campgrounds = [
-        {name : 'Kittatiny', image : 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1506&q=80'},
-        {name : 'Blue Hill', image : 'https://images.unsplash.com/photo-1470246973918-29a93221c455?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80'},
-        {name : 'Kittatiny', image : 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1506&q=80'},
-        {name : 'Blue Hill', image : 'https://images.unsplash.com/photo-1470246973918-29a93221c455?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80'},
-        {name : 'Kittatiny', image : 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1506&q=80'},
-        {name : 'Blue Hill', image : 'https://images.unsplash.com/photo-1470246973918-29a93221c455?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80'},
-        {name : 'Mountain Range', image : 'https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80'},
-        {name : 'Camp Park', image : 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'},
-        {name : 'Tent City', image : 'https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=647&q=80'},
-        {name : 'Fauna or Flora', image : 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80'},
-        {name : 'Kittatiny', image : 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1506&q=80'},
-        {name : 'Blue Hill', image : 'https://images.unsplash.com/photo-1470246973918-29a93221c455?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80'},
-        {name : 'Mountain Range', image : 'https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80'},
-        {name : 'Fauna or Flora', image : 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80'},
-        {name : 'Kittatiny', image : 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1506&q=80'},
-        {name : 'Blue Hill', image : 'https://images.unsplash.com/photo-1470246973918-29a93221c455?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80'},
-        {name : 'Mountain Range', image : 'https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80'},
-        {name : 'Camp Park', image : 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'},
-        {name : 'Tent City', image : 'https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=647&q=80'},
-        {name : 'Fauna or Flora', image : 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80'},
-        {name : 'Kittatiny', image : 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1506&q=80'},
-        {name : 'Blue Hill', image : 'https://images.unsplash.com/photo-1470246973918-29a93221c455?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80'},
-        {name : 'Mountain Range', image : 'https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80'},
-        {name : 'Blue Hill', image : 'https://images.unsplash.com/photo-1470246973918-29a93221c455?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80'},
-        {name : 'Mountain Range', image : 'https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80'},
-        {name : 'Camp Park', image : 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'},
-        {name : 'Tent City', image : 'https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=647&q=80'},
-        {name : 'Fauna or Flora', image : 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80'},
-        {name : 'Mountain Range', image : 'https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80'},
-        {name : 'Camp Park', image : 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'},
-        {name : 'Tent City', image : 'https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=647&q=80'},
-        {name : 'Fauna or Flora', image : 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80'},
-        {name : 'Kittatiny', image : 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1506&q=80'},
-        {name : 'Blue Hill', image : 'https://images.unsplash.com/photo-1470246973918-29a93221c455?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80'},
-        {name : 'Mountain Range', image : 'https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80'},
-        {name : 'Camp Park', image : 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'},
-        {name : 'Tent City', image : 'https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=647&q=80'},
-        {name : 'Fauna or Flora', image : 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80'},
-      ];
+const rp                  = require('request-promise'),
+      bodyParser          = require('body-parser'),
+      mongoose            = require('mongoose')
+      express             = require('express'),
+      app                 = express(),
+      port                = 3000,
+      mongoURI            = `mongodb://localhost/yelp_camp`,
+      campgroundSchema    = new mongoose.Schema({
+                                name : String,
+                                image : String
+                            }),
+      Campground          = mongoose.model('Campground', campgroundSchema),
+      mongoConnectOptions = {
+                              useNewUrlParser : true, 
+                              useFindAndModify : false, 
+                              useCreateIndex : true 
+                            };
+
+mongoose.connect(mongoURI, mongoConnectOptions)
+          .catch( err => {
+            console.log(err);
+          });
+
+// Campground.create({name : 'Kittatiny', image : 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1506&q=80'})
+//             .then( campground => {
+//               console.log(`New Campground: ${campground}`);
+//             })
+//             .catch( err => {
+//               console.log(err);
+//             });
 
 app.use(express.static('public')); // for including this folder into the scope (stylesheet/script directory)
 app.use(bodyParser.urlencoded({extended : true})); // just copypasta, needed to enable bodyParser (populate req.body)
@@ -55,7 +40,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/campgrounds', (req, res) => {
-  res.render('campgrounds', {campgrounds : campgrounds});
+  Campground.find()
+    .then( campgrounds => {
+      res.render('campgrounds', {campgrounds});
+    })
+    .catch( err => {
+      console.log(err);
+    })
 });
 
 app.post('/campgrounds', (req, res) => {
@@ -63,8 +54,14 @@ app.post('/campgrounds', (req, res) => {
       image = req.body.image;
 
   if(name !== '' && image !== ''){
-    var newCampground = {name : name, image : image};
-    campgrounds.push(newCampground);
+    var newCampground = {name, image};
+    Campground.create(newCampground)
+      .then( campground => {
+        console.log(`New Campground: ${campground}`);
+      })
+      .catch( err => {
+        console.log(err);
+      });
   }
   
   res.redirect('/campgrounds');
@@ -73,20 +70,6 @@ app.post('/campgrounds', (req, res) => {
 app.get('/campgrounds/new', (req, res) => {
   res.render('new');
 });
-
-// app.get('/results', function(req, res){
-  //   var query = req.query.s,
-  //       url = `http://www.omdbapi.com/?s=${query}&apikey=thewdb`;
-  //   rp(url)
-  //     .then((body) => {
-    //       const parsedData = JSON.parse(body);
-    //       res.render('results', {results : parsedData.Search,
-    //                              query : query});
-    //     })
-    //     .catch((error) => {
-      //       console.log('Error!', error);
-      //     });
-      // })
       
 app.listen(port, function(){
   console.log(`Server restarted. Listening on port ${port}`);

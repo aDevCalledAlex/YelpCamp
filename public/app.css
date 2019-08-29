@@ -50,17 +50,25 @@ h2.card-title {
   font-size : 1.5rem;
 }
 
+.card-columns .card {
+  margin-bottom: 1rem;
+}
+
 a {
   text-decoration : none !important;
 }
 
-#newCampground > h1 {
+#new-campground > h1 {
   padding-bottom : 1rem;
 }
 
-#newCampground {
+#new-campground {
   max-width : 600px;
   margin : 0 auto;
+}
+
+#nav-search {
+  margin-right : 10px;
 }
 
 /** Responsive card columns **/
