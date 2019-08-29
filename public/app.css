@@ -1,0 +1,74 @@
+/* .campground img{
+  width : 500px;
+  border-radius : 5px;
+} */
+
+/* .campground{
+  margin-bottom : 30px;
+} */
+
+body{
+  background-color : rgb(37, 37, 37);
+}
+
+form{
+  padding : 5px 0;
+}
+
+label{
+  display : block;
+  font-weight : 600;
+}
+
+form[action="/campgrounds"]{
+  display : inline;
+}
+
+input[type="text"]{
+  margin-bottom : 10px;
+}
+
+.jumbotron{
+  background-color: rgb(160, 160, 160);
+  margin-top : 10px;
+}
+
+.btn.bg-dark{
+  color : white; 
+}
+
+.submit, .back{
+  margin-top : 10px;
+  margin-right : 10px;
+}
+
+h2.card-title{
+  font-size : 1.5rem;
+}
+
+a{
+  text-decoration : none !important;
+}
+
+/** Responsive card columns **/
+@media (min-width : 576px) {
+  .card-columns {
+    column-count : 2;
+  }
+}
+@media (min-width : 768px) {
+  .card-columns {
+    column-count : 3;
+  }
+}
+@media (min-width : 992px) {
+  .card-columns {
+    column-count : 4;
+  }
+}
+@media (min-width : 1200px) {
+  /* .card-columns {
+    column-count : 4;
+  } */
+}
+/*****************************/

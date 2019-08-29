@@ -1,0 +1,24 @@
+<% include partials/header %>
+
+<header class="jumbotron">
+  <h1>Create a New Campground</h1>
+  <p>Make an <em>awesome</em> campground in just a few simple steps</p>
+
+  <form action="/campgrounds" method="POST">
+    <label for="name">Name</label>
+    <input class="form-control" type="text" name="name" placeholder="Name">
+    <label for="name">Image</label>
+    <input class="form-control" type="text" name="image" placeholder="Image URL">
+    <div class="row">
+      <div class="col-8">
+          <input class="submit btn btn-success btn-block" type="submit">
+      </div>
+      <div class="col-4">
+          <a href="/campgrounds"><button class="back btn btn-danger btn-block col-sm">Back</button></a>
+      </div>
+    </div>
+  </form>
+   
+</header>
+
+<% include partials/footer %>
