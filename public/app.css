@@ -1,53 +1,66 @@
-/* .campground img{
+/* .campground img {
   width : 500px;
   border-radius : 5px;
 } */
 
-/* .campground{
+/* .campground {
   margin-bottom : 30px;
 } */
 
-body{
+body {
   background-color : rgb(37, 37, 37);
 }
 
-form{
+nav {
+  margin-bottom : 20px;
+}
+
+form {
   padding : 5px 0;
 }
 
-label{
+label {
   display : block;
   font-weight : 600;
 }
 
-form[action="/campgrounds"]{
+form[action="/campgrounds"] {
   display : inline;
 }
 
-input[type="text"]{
+input[type="text"] {
   margin-bottom : 10px;
 }
 
-.jumbotron{
-  background-color: rgb(160, 160, 160);
+.jumbotron {
+  background-color: rgb(200, 200, 200);
   margin-top : 10px;
 }
 
-.btn.bg-dark{
+.btn.bg-dark {
   color : white; 
 }
 
-.submit, .back{
+.submit, .back {
   margin-top : 10px;
   margin-right : 10px;
 }
 
-h2.card-title{
+h2.card-title {
   font-size : 1.5rem;
 }
 
-a{
+a {
   text-decoration : none !important;
+}
+
+#newCampground > h1 {
+  padding-bottom : 1rem;
+}
+
+#newCampground {
+  max-width : 600px;
+  margin : 0 auto;
 }
 
 /** Responsive card columns **/
