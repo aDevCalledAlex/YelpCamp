@@ -7,7 +7,8 @@ const rp                  = require('request-promise'),
       mongoURI            = `mongodb://localhost/yelp_camp`,
       campgroundSchema    = new mongoose.Schema({
                                 name : String,
-                                image : String
+                                image : String,
+                                description : String
                             }),
       Campground          = mongoose.model('Campground', campgroundSchema),
       mongoConnectOptions = {
@@ -21,40 +22,38 @@ mongoose.connect(mongoURI, mongoConnectOptions)
             console.log(err);
           });
 
-// Campground.create({name : 'Kittatiny', image : 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1506&q=80'})
-//             .then( campground => {
-//               console.log(`New Campground: ${campground}`);
-//             })
-//             .catch( err => {
-//               console.log(err);
-//             });
-
 app.use(express.static('public')); // for including this folder into the scope (stylesheet/script directory)
 app.use(bodyParser.urlencoded({extended : true})); // just copypasta, needed to enable bodyParser (populate req.body)
+
 app.set('view engine', 'ejs');
 
-// TODO: Change Navbar item to .active when on that item's page
+// ****************************************************************
+//   TODO: Change Navbar item to .active when on that item's page 
+// ****************************************************************
 
 app.get('/', (req, res) => {
   res.render('landing');
 });
 
-app.get('/campgrounds', (req, res) => {
+// INDEX - Main page to see campgrounds
+app.get('/index', (req, res) => {
   Campground.find()
     .then( campgrounds => {
-      res.render('campgrounds', {campgrounds});
+      res.render('index', {campgrounds});
     })
     .catch( err => {
       console.log(err);
     })
 });
 
-app.post('/campgrounds', (req, res) => {
+// CREATE - Create a new campground (POST)
+app.post('/index', (req, res) => {
   var name = req.body.name,
-      image = req.body.image;
+      image = req.body.image,
+      description = req.body.description;
 
-  if(name !== '' && image !== ''){
-    var newCampground = {name, image};
+  if(name !== '' && image !== '' && description !== ''){
+    var newCampground = {name, image, description};
     Campground.create(newCampground)
       .then( campground => {
         console.log(`New Campground: ${campground}`);
@@ -64,11 +63,24 @@ app.post('/campgrounds', (req, res) => {
       });
   }
   
-  res.redirect('/campgrounds');
+  res.redirect('index');
 });
 
-app.get('/campgrounds/new', (req, res) => {
+// New - Form to create a new campground
+app.get('/index/new', (req, res) => {
   res.render('new');
+});
+
+// SHOW - Shows more information about a campground
+app.get('/index/:id', (req, res) => { // Needs to be below /new
+  Campground.findById(req.params.id)
+    .then( campground => {
+      res.render('show', {campground});
+    })
+    .catch( err => {
+      console.log(err);
+      res.redirect('/index');
+    });
 });
       
 app.listen(port, function(){

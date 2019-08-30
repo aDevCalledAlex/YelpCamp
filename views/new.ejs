@@ -1,20 +1,22 @@
 <% include partials/header %>
 
-<header id="new-campground" class="jumbotron">
+<header id="newCampground" class="jumbotron">
   <h1>Create New Campground</h1>
   <!-- <p>Make an <em>awesome</em> campground in just a few simple steps</p> -->
 
-  <form action="/campgrounds" method="POST">
+  <form action="/index" method="POST">
     <label for="name">Name</label>
     <input class="form-control" type="text" name="name" placeholder="Name">
-    <label for="name">Image</label>
+    <label for="image">Image</label>
     <input class="form-control" type="text" name="image" placeholder="Image URL">
+    <label for="description">Description</label>
+    <input class="form-control" type="text" name="description" placeholder="Description">
     <div class="row">
       <div class="col-8">
           <input class="submit btn btn-success btn-block" type="submit">
       </div>
       <div class="col-4">
-          <a href="/campgrounds"><button class="back btn btn-danger btn-block col-sm">Back</button></a>
+          <a href="/index"><button class="back btn btn-danger btn-block col-sm">Back</button></a>
       </div>
     </div>
   </form>
