@@ -1,14 +1,14 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
 <header class="jumbotron">
   <h1>Campgrounds</h1>
   <p>Look at all of these <em>awesome</em> campgrounds!</p>
-  <a href="index/new"><button class="btn bg-dark">Create a New Campground</button></a>
+  <a href="campgrounds/new"><button class="btn bg-dark">Create a New Campground</button></a>
 </header>
 
 <div class="card-columns">
     <% campgrounds.forEach(campground => { %>
-    <a href="/index/<%= campground._id %>">
+    <a href="/campgrounds/<%= campground._id %>">
       <div class="card">
         <img class="card-img-top" src="<%= campground.image %>" alt="">
         <div class="card-body">
@@ -20,4 +20,4 @@
   </div>
 
  
-<% include partials/footer %>
+<% include ../partials/footer %>

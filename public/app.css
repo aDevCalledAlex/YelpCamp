@@ -28,6 +28,10 @@ img {
   border-radius : 5px;
 }
 
+textarea {
+  width : 100%;
+}
+
 form[action="/campgrounds"] {
   display : inline;
 }
@@ -45,10 +49,15 @@ input[type="text"] {
   color : white; 
 }
 
-.submit, .back {
+input[type="text"]:last-of-type, 
+textarea:last-of-type {
+  margin-bottom : 20px;
+}
+
+/* .submit, .back {
   margin-top : 10px;
   margin-right : 10px;
-}
+} */
 
 h2.card-title {
   font-size : 1.5rem;
@@ -80,6 +89,11 @@ a:hover {
   margin : 20px 0; 
 }
 
+#show img {
+  /* width : 100%; */
+  object-fit : contain;
+}
+
 #newCampground > h1 {
   padding-bottom : 1rem;
 }
@@ -91,6 +105,10 @@ a:hover {
 
 #navSearch {
   margin-right : 10px;
+}
+
+#commentSection {
+  margin-top : 20px;
 }
 
 /** Responsive card columns **/

@@ -1,26 +1,26 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
 <header id="newCampground" class="jumbotron">
   <h1>Create New Campground</h1>
   <!-- <p>Make an <em>awesome</em> campground in just a few simple steps</p> -->
 
-  <form action="/index" method="POST">
+  <form action="/campgrounds" method="POST">
     <label for="name">Name</label>
-    <input class="form-control" type="text" name="name" placeholder="Name">
+    <input class="form-control" type="text" name="name" placeholder="Name" required>
     <label for="image">Image</label>
-    <input class="form-control" type="text" name="image" placeholder="Image URL">
+    <input class="form-control" type="text" name="image" placeholder="Image URL" required>
     <label for="description">Description</label>
-    <input class="form-control" type="text" name="description" placeholder="Description">
+    <input class="form-control" type="text" name="description" placeholder="Description" required>
     <div class="row">
       <div class="col-8">
           <input class="submit btn btn-success btn-block" type="submit">
       </div>
       <div class="col-4">
-          <a href="/index"><button class="back btn btn-danger btn-block col-sm">Back</button></a>
+          <a href="/campgrounds"><button class="back btn btn-danger btn-block col-sm">Back</button></a>
       </div>
     </div>
   </form>
    
 </header>
 
-<% include partials/footer %>
+<% include ../partials/footer %>

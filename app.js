@@ -1,21 +1,17 @@
-const rp                  = require('request-promise'),
-      bodyParser          = require('body-parser'),
-      mongoose            = require('mongoose')
-      express             = require('express'),
+const express             = require('express'),
       app                 = express(),
       port                = 3000,
+      bodyParser          = require('body-parser'),
+      rp                  = require('request-promise'),
+      mongoose            = require('mongoose')
       mongoURI            = `mongodb://localhost/yelp_camp`,
-      campgroundSchema    = new mongoose.Schema({
-                                name : String,
-                                image : String,
-                                description : String
-                            }),
-      Campground          = mongoose.model('Campground', campgroundSchema),
       mongoConnectOptions = {
                               useNewUrlParser : true, 
                               useFindAndModify : false, 
                               useCreateIndex : true 
                             };
+      Campground          = require('./models/campground'),
+      Comment             = require('./models/comment'),
 
 mongoose.connect(mongoURI, mongoConnectOptions)
           .catch( err => {
@@ -32,14 +28,14 @@ app.set('view engine', 'ejs');
 // ****************************************************************
 
 app.get('/', (req, res) => {
-  res.render('landing');
+  res.render('campgrounds/landing');
 });
 
-// INDEX - Main page to see campgrounds
-app.get('/index', (req, res) => {
+// campgrounds - Main page to see campgrounds
+app.get('/campgrounds', (req, res) => {
   Campground.find()
     .then( campgrounds => {
-      res.render('index', {campgrounds});
+      res.render('campgrounds/index', {campgrounds});
     })
     .catch( err => {
       console.log(err);
@@ -47,40 +43,67 @@ app.get('/index', (req, res) => {
 });
 
 // CREATE - Create a new campground (POST)
-app.post('/index', (req, res) => {
+app.post('/campgrounds', (req, res) => {
   var name = req.body.name,
       image = req.body.image,
       description = req.body.description;
 
-  if(name !== '' && image !== '' && description !== ''){
-    var newCampground = {name, image, description};
-    Campground.create(newCampground)
-      .then( campground => {
-        console.log(`New Campground: ${campground}`);
-      })
-      .catch( err => {
-        console.log(err);
-      });
-  }
-  
-  res.redirect('index');
-});
-
-// New - Form to create a new campground
-app.get('/index/new', (req, res) => {
-  res.render('new');
-});
-
-// SHOW - Shows more information about a campground
-app.get('/index/:id', (req, res) => { // Needs to be below /new
-  Campground.findById(req.params.id)
+  var newCampground = {name, image, description};
+  Campground.create(newCampground)
     .then( campground => {
-      res.render('show', {campground});
+      console.log(`New Campground: ${campground}`);
     })
     .catch( err => {
       console.log(err);
-      res.redirect('/index');
     });
+  
+  res.redirect('campgrounds');
+});
+
+// NEW - Form to create a new campground
+app.get('/campgrounds/new', (req, res) => {
+  res.render('campgrounds/new');
+});
+
+// SHOW - Shows more information about a campground
+app.get('/campgrounds/:id', (req, res) => { // Needs to be below /new
+  Campground.findById(req.params.id).populate('comments')
+    .then( campground => {
+      res.render('campgrounds/show', {campground});
+    })
+    .catch( err => {
+      console.log(err);
+      res.redirect('/campgrounds');
+    });
+});
+
+// Comment Routes!
+// ***************
+// NEW - Form to create a new comment for a campground
+app.get('/campgrounds/:id/comments/new', (req, res) => { // Needs to be below /new
+  Campground.findById(req.params.id)
+    .then( campground => {
+      res.render('comments/new', {campground});
+    })
+    .catch( err => {
+      console.log(err);
+      res.redirect(`/campgrounds/${req.params.id}`);
+    });
+});
+
+// CREATE - Create a new comment for a campground (POST)
+app.post('/campgrounds/:id/comments', async (req, res) => {
+  try{
+    let comment = await Comment.create(req.body.comment);
+    let campground = await Campground.findById(req.params.id);
+    campground.comments.push(comment);
+    campground.save();
+  }
+  catch(err){
+    console.log(err);
+  }
+
+  res.redirect('/campgrounds/:id');
 });
       
 app.listen(port, function(){

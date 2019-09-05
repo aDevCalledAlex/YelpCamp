@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+
+<header id="newComment" class="jumbotron">
+  <h1>Create New Comment for <%= campground.name %></h1>
+  <!-- <p>Make an <em>awesome</em> campground in just a few simple steps</p> -->
+
+  <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
+    <label for="comment[author]">Author</label>
+    <input class="form-control" type="text" name="comment[author]" placeholder="Name" required>
+    <label for="comment[body]">Comment</label>
+    <textarea rows="10" name="comment[body]" required></textarea>
+    <div class="row">
+      <div class="col-8">
+          <input class="submit btn btn-success btn-block" type="submit">
+      </div>
+      <div class="col-4">
+          <a href="/campgrounds/<%= campground._id %>">
+            <button class="back btn btn-danger btn-block col-sm">Back</button>
+          </a>
+      </div>
+    </div>
+  </form>
+   
+</header>
+
+<% include ../partials/footer %>
