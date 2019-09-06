@@ -1,19 +1,47 @@
 <% include ../partials/header %>
 
-<header id="show" class="jumbotron">
-    <h1><%= campground.name %></h1>
-    <img src="<%= campground.image %>" alt="">
-    <p><%= campground.description %></p>
-    <a href="/campgrounds/<%= campground._id %>/comments/new"><button class="btn btn-primary">Comment</button></a>
-    <a href="/campgrounds"><button class=" btn btn-danger">Back</button></a>
-    <div id="commentSection">
-      <h2>Comments:</h2>
-      <ul>
+<div class="row">
+  <div class="col-md-3">
+    <p class="lead">Yelp Camp</p>
+    <div class="list-group">
+      <li class="list-group-item active">Info 1</li>
+      <li class="list-group-item">Info 2</li>
+      <li class="list-group-item">Info 3</li>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div id="show" class="card">
+      <img src="<%= campground.image %>" alt="" class="card-img-top">
+      <div id="showContent" class="card-full">
+        <div class="titles">
+          <h2 class="card-title"><a href="https://www.state.nj.us/dep/parksandforests/parks/kittval.html"><%= campground.name %></a></h2>
+          <h3 class="card-title">$84/night</h3>
+        </div>
+        <div class="content">
+          <p class="card-text"><%= campground.description %></p>
+        </div>
+      </div>
+    </div>
+    <div id="commentSection" class="card">
+      <header id="commentsHeader">
+        <h3 class="card-title">Comments</h3>
+        <a href="/campgrounds/<%= campground._id %>/comments/new"><button class="btn btn-primary"><i class="fas fa-plus"></i> New</button></a>  
+      </header>
+      <ul class="list-group list-group-flush">
         <% campground.comments.forEach( comment => { %>
-          <li><strong><%= comment.author %></strong>: <span><%= comment.body %></span></li>
+          <li id="comment" class="list-group-item">
+            <div id="commentHeader">
+              <strong><%= comment.author %></strong>
+              <p>10 days ago</p>
+            </div>
+            <div id="commentContent">
+              <span><%= comment.body %></span>
+            </div>
+          </li>
         <% }) %>
       </ul>
     </div>
-</header>
+  </div>
+</div>
 
 <% include ../partials/footer %>

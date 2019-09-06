@@ -18,7 +18,7 @@ mongoose.connect(mongoURI, mongoConnectOptions)
             console.log(err);
           });
 
-app.use(express.static('public')); // for including this folder into the scope (stylesheet/script directory)
+app.use(express.static(`${__dirname}/public`)); // for including this folder into the scope (stylesheet/script directory)
 app.use(bodyParser.urlencoded({extended : true})); // just copypasta, needed to enable bodyParser (populate req.body)
 
 app.set('view engine', 'ejs');
@@ -103,7 +103,7 @@ app.post('/campgrounds/:id/comments', async (req, res) => {
     console.log(err);
   }
 
-  res.redirect('/campgrounds/:id');
+  res.redirect(`/campgrounds/${req.params.id}`);
 });
       
 app.listen(port, function(){

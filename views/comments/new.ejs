@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 
 <header id="newComment" class="jumbotron">
-  <h1>Create New Comment for <%= campground.name %></h1>
+  <h1>New Comment : <%= campground.name %></h1>
   <!-- <p>Make an <em>awesome</em> campground in just a few simple steps</p> -->
 
   <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
