@@ -10,4 +10,4 @@ const mongoose         = require('mongoose'),
                            }]
                          });
 
-module.exports   = mongoose.model('Campground', campgroundSchema); // Allow Campground to be required
+module.exports = mongoose.model('Campground', campgroundSchema); // Allow Campground to be required

@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+
+<header id="register" class="jumbotron">
+    <h1>Sign Up</h1>
+    <p>Join a community of millions of camping enthusiasts</p>
+  
+    <form action="/register" method="POST">
+      <label for="username">Username</label>
+      <input class="form-control" type="text" name="username" placeholder="Username" required>
+      <label for="password">Password</label>
+      <input class="form-control" type="password" name="password" placeholder="Password" required>
+      <div class="row">
+        <div class="col-8">
+            <input class="submit btn btn-success btn-block" type="submit" value="Register">
+        </div>
+        <div class="col-4">
+            <a href="/">
+              <button class="back btn btn-danger btn-block col-sm">Back</button>
+            </a>
+        </div>
+      </div>
+    </form>
+     
+  </header>
+
+  <% include ../partials/footer %>

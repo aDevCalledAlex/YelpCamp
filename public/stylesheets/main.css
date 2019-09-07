@@ -37,7 +37,8 @@ form[action="/campgrounds"] {
   display : inline;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   margin-bottom : 10px;
 }
 
