@@ -33,8 +33,24 @@ textarea {
   padding : 5px 10px;
 }
 
-form[action="/campgrounds"] {
-  display : inline;
+.form-small {
+  width : 400px;
+}
+
+@media (max-width : 450px) {
+  .form-small{
+    width : 100%;
+  }
+}
+
+.form-large {
+  width : 500px;
+}
+
+@media (max-width : 650px) {
+  .form-large {
+    width : 100%;
+  }
 }
 
 input[type="text"],
@@ -133,6 +149,32 @@ a:hover {
 
 .card {
   border : none;
+}
+
+#newComment,
+#newCampground {
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  flex-direction : column;
+  background-color: rgb(200, 200, 200);
+  padding : 20px;
+  border-radius : 10px;
+  max-width : 800px;
+  margin : 0 auto;
+}
+
+#register, 
+#login {
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  flex-direction : column;
+  background-color: rgb(200, 200, 200);
+  padding : 20px;
+  border-radius : 10px;
+  max-width : 500px;
+  margin : 0 auto;
 }
 
 #show {

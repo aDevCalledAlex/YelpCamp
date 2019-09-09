@@ -12,7 +12,6 @@ const express             = require('express'),
                               useFindAndModify : false, 
                               useCreateIndex : true 
                             };
-      
       // Models
       User                = require('./models/user'),
       Campground          = require('./models/campground'),

@@ -1,12 +1,11 @@
 <% include ../partials/header %>
 
-<header id="newComment" class="jumbotron">
+<header id="newComment">
   <h1>New Comment : <%= campground.name %></h1>
   <!-- <p>Make an <em>awesome</em> campground in just a few simple steps</p> -->
 
-  <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
-    <label for="comment[body]">Comment</label>
-    <textarea rows="10" name="comment[body]" required></textarea>
+  <form class="form-large" action="/campgrounds/<%= campground._id %>/comments" method="POST">
+    <textarea class="form-control" rows="10" name="comment[body]" required></textarea>
     <div class="row">
       <div class="col-8">
         <input class="submit btn btn-success btn-block" type="submit">
