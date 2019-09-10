@@ -33,7 +33,56 @@ textarea {
   padding : 5px 10px;
 }
 
-.form-small {
+form {
+  width : 100%;
+}
+
+#newCampground,
+#newComment {
+  margin-top : 20px;
+  width : 500px;
+}
+
+#newCampground,
+#newComment, 
+#register,
+#login {
+  margin-top : 20px;
+}
+
+#newCampground,
+#newComment {
+  width : 700px;
+}
+
+#login {
+  width : 400px;
+}
+
+#register {
+  width : 500px;
+}
+
+@media (max-width : 700px) {
+  #newCampground,
+  #newComment {
+    width : 100%;
+  }
+}
+
+@media (max-width : 500px) {
+  #register {
+    width : 100%;
+  }
+}
+
+@media (max-width : 400px) {
+  #login {
+    width : 100%;
+  }
+}
+
+/* .form-small {
   width : 400px;
 }
 
@@ -51,7 +100,7 @@ textarea {
   .form-large {
     width : 100%;
   }
-}
+} */
 
 input[type="text"],
 input[type="password"] {
@@ -61,6 +110,7 @@ input[type="password"] {
 .jumbotron {
   background-color: rgb(200, 200, 200);
   margin-top : 10px;
+  width : 100%;
 }
 
 .btn.bg-dark {
@@ -119,6 +169,13 @@ a:hover {
   margin : 10px;
 } */
 
+#mainContainer {
+  display : flex;
+  justify-content : start;
+  align-items : center;
+  flex-direction : column;
+}
+
 #commentHeader {
   display : flex;
   justify-content : space-between;
@@ -161,7 +218,6 @@ a:hover {
   padding : 20px;
   border-radius : 10px;
   max-width : 800px;
-  margin : 0 auto;
 }
 
 #register, 
@@ -174,7 +230,6 @@ a:hover {
   padding : 20px;
   border-radius : 10px;
   max-width : 500px;
-  margin : 0 auto;
 }
 
 #show {

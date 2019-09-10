@@ -7,17 +7,17 @@
 </header>
 
 <div class="card-columns">
-    <% campgrounds.forEach(campground => { %>
-    <a href="/campgrounds/<%= campground._id %>">
-      <div id="cardPreview" class="card">
-        <img class="card-img-top" src="<%= campground.image %>" alt="">
-        <div class="card-body">
-          <h2 class="card-title"><%= campground.name %></h2>
-        </div>
+  <% campgrounds.forEach(campground => { %>
+  <a href="/campgrounds/<%= campground._id %>">
+    <div id="cardPreview" class="card">
+      <img class="card-img-top" src="<%= campground.image %>" alt="">
+      <div class="card-body">
+        <h2 class="card-title"><%= campground.name %></h2>
       </div>
-    </a>
-    <% }); %>
-  </div>
+    </div>
+  </a>
+  <% }); %>
+</div>
 
  
 <% include ../partials/footer %>
