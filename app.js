@@ -3,6 +3,7 @@ const express             = require('express'),
       port                = 3000,
       bodyParser          = require('body-parser'),
       rp                  = require('request-promise'),
+      methodOverride      = require('method-override'),
       passport            = require('passport'),
       LocalStrategy       = require('passport-local'),
       mongoose            = require('mongoose')
@@ -27,6 +28,7 @@ mongoose.connect(mongoURI, mongoConnectOptions)
             console.log(err);
           });
 
+app.use(methodOverride("_method"));
 app.use(express.static(`${__dirname}/public`)); // for including this folder into the scope (stylesheet/script directory)
 app.use(bodyParser.urlencoded({ extended : true })); // just copypasta, needed to enable bodyParser (populate req.body)
 app.use(require('express-session')({

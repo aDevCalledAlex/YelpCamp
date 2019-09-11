@@ -1,24 +1,17 @@
 <% include ../partials/header %>
 
-<header id="newCampground">
+<header class="form" id="newCampground">
   <h1>New Campground</h1>
   <!-- <p>Make an <em>awesome</em> campground in just a few simple steps</p> -->
 
-  <form class="form-large" action="/campgrounds" method="POST">
-    <label for="name">Name</label>
-    <input class="form-control" type="text" name="name" placeholder="Name" required>
-    <label for="image">Image</label>
-    <input class="form-control" type="text" name="image" placeholder="Image URL" required>
-    <label for="description">Description</label>
-    <textarea class="form-control" rows="5" name="description" required></textarea>
-    <div class="row">
-      <div class="col-8">
-          <input class="submit btn btn-success btn-block" type="submit">
-      </div>
-      <div class="col-4">
-          <a href="/campgrounds"><button class="back btn btn-danger btn-block col-sm">Back</button></a>
-      </div>
-    </div>
+  <form action="/campgrounds" method="POST">
+    <label for="campground[name]">Name</label>
+    <input class="form-control" type="text" name="campground[name]" placeholder="Name" required>
+    <label for="campground[image]">Image</label>
+    <input class="form-control" type="text" name="campground[image]" placeholder="Image URL" required>
+    <label for="campground[description]">Description</label>
+    <textarea class="form-control" rows="5" name="campground[description]" required></textarea>
+    <input class="submit btn btn-success btn-block" type="submit">
   </form>
    
 </header>

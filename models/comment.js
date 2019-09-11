@@ -4,7 +4,7 @@ const mongoose      = require('mongoose'),
                         body : String,
                         author : {
                           id : {
-                            type : mongoose.Schema.Types.ObjectID,
+                            type : mongoose.Schema.Types.ObjectId,
                             ref : "User"
                           },
                           username : String

@@ -19,9 +19,27 @@
         </div>
         <div class="content">
           <p class="card-text"><%= campground.description %></p>
+          <div class="showBottom">
+            <p class="card-text"><em>Submitted by <strong><%= campground.author.username %></strong></em></p>
+            <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+              <div id="showButtons">
+                <a class="edit" href="/campgrounds/<%= campground._id %>/edit">
+                  <button class="btn btn-sm btn-warning">
+                    <i class="far fa-edit"></i> Edit
+                  </button>
+                </a>
+                <form class="delete" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                  <button class="btn btn-sm btn-danger">
+                      <i class="far fa-trash-alt"></i> Delete
+                  </button>
+                </form>
+              </div>
+            <% } %>
+          </div>
         </div>
       </div>
     </div>
+
     <div id="commentSection" class="card">
       <header id="commentsHeader">
         <h3 class="card-title">Comments</h3>
@@ -36,6 +54,22 @@
             </div>
             <div id="commentContent">
               <span><%- comment.body %></span>
+            </div>
+            <div id="commentBottom">
+              <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                <div id="commentButtons">
+                  <a class="edit" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
+                    <button class="btn btn-sm btn-warning">
+                      <i class="far fa-edit"></i> Edit
+                    </button>
+                  </a>
+                  <form class="delete" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">
+                        <i class="far fa-trash-alt"></i> Delete
+                    </button>
+                  </form>
+                </div>
+              <% } %>
             </div>
           </li>
         <% }) %>

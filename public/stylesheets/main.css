@@ -24,10 +24,6 @@ label {
   font-weight : 600;
 }
 
-img {
-  /* border-radius : 5px; */
-}
-
 textarea {
   width : 100%;
   padding : 5px 10px;
@@ -37,19 +33,24 @@ form {
   width : 100%;
 }
 
+#editComment,
+#editCampground,
 #newCampground,
 #newComment {
   margin-top : 20px;
   width : 500px;
 }
 
-#newCampground,
-#newComment, 
-#register,
-#login {
+.delete {
+  display : inline;
+}
+
+.form {
   margin-top : 20px;
 }
 
+#editComment,
+#editCampground,
 #newCampground,
 #newComment {
   width : 700px;
@@ -64,6 +65,8 @@ form {
 }
 
 @media (max-width : 700px) {
+  #editComment,
+  #editCampground,
   #newCampground,
   #newComment {
     width : 100%;
@@ -81,27 +84,6 @@ form {
     width : 100%;
   }
 }
-
-/* .form-small {
-  width : 400px;
-}
-
-@media (max-width : 450px) {
-  .form-small{
-    width : 100%;
-  }
-}
-
-.form-large {
-  width : 500px;
-}
-
-@media (max-width : 650px) {
-  .form-large {
-    width : 100%;
-  }
-} */
-
 input[type="text"],
 input[type="password"] {
   margin-bottom : 10px;
@@ -121,11 +103,6 @@ input[type="text"]:last-of-type,
 textarea:last-of-type {
   margin-bottom : 20px;
 }
-
-/* .submit, .back {
-  margin-top : 10px;
-  margin-right : 10px;
-} */
 
 h2.card-title {
   font-size : 1.5rem;
@@ -150,10 +127,28 @@ a:hover {
 }
 
 #commentsHeader,
+.showBottom,
 .titles {
   display : flex;
   justify-content : space-between;
-  align-items : baseline;
+  align-items : flex-end;
+}
+
+#comment:hover #commentBottom {
+  display : flex;
+  justify-content : flex-end;
+}
+
+#commentBottom {
+  display : none;
+}
+
+.showBottom p {
+  margin : 0;
+}
+
+#commentsHeader,
+.titles {
   margin-bottom : 10px;
 }
 
@@ -164,10 +159,6 @@ a:hover {
 .titles h3 {
   font-size : 1.3em;
 }
-
-/* .content  * {
-  margin : 10px;
-} */
 
 #mainContainer {
   display : flex;
@@ -186,6 +177,7 @@ a:hover {
   display : flex;
   justify-content : left;
   align-items : start;
+  margin-bottom : 10px;
 }
 
 #show, #commentSection {
@@ -208,6 +200,8 @@ a:hover {
   border : none;
 }
 
+#editComment,
+#editCampground,
 #newComment,
 #newCampground {
   display : flex;
@@ -232,16 +226,6 @@ a:hover {
   max-width : 500px;
 }
 
-#show {
-  /* background : none;
-  border : none; */
-}
-
-#showz img {
-  /* width : 100%; */
-  object-fit : contain;
-}
-
 #newCampground > h1 {
   padding-bottom : 1rem;
 }
@@ -253,10 +237,6 @@ a:hover {
 
 #navSearch {
   margin-right : 10px;
-}
-
-#commentSectionz {
-  margin-top : 20px;
 }
 
 #cardPreview:hover {
