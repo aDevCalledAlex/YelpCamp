@@ -1,10 +1,11 @@
-const express = require('express'),
-      router  = express.Router({ mergeParams : true }),
+const express    = require('express'),
+      router     = express.Router({ mergeParams : true }),
       Campground = require('../models/campground'),
-      Comment    = require('../models/comment');
+      Comment    = require('../models/comment'),
+      middleware = require('../middleware');
 
 // Comment: NEW - Form to create a new Comment for a Campground
-router.get('/new', isLoggedIn, (req, res) => { // Needs to be below /new
+router.get('/new', middleware.isLoggedIn, (req, res) => { // Needs to be below /new
   Campground.findById(req.params.id)
     .then( campground => {
       res.render('comments/new', {campground});
@@ -16,7 +17,7 @@ router.get('/new', isLoggedIn, (req, res) => { // Needs to be below /new
 });
 
 // Comment: CREATE - Create a new Comment for a Campground (POST)
-router.post('/', isLoggedIn, (req, res) => {
+router.post('/', middleware.isLoggedIn, (req, res) => {
   let campgroundID = req.params.id,
       newComment   = {
                        body : req.body.comment.body,
@@ -69,10 +70,10 @@ router.post('/', isLoggedIn, (req, res) => {
     });
   };
   
-  /**********************************************************************
-  *  Above may be more efficient than below 
-  *  --(allows comment creation/saving be async with finding campground)
-  **********************************************************************/
+  /************************************************************************/
+  /*  Above may be more efficient than below                              */
+  /*  --(allows comment creation/saving be async with finding campground) */
+  /************************************************************************/
   // try{
   //   let newComment = await Comment.create(req.body.comment);
   //     newComment.author.id = req.user._id;
@@ -90,7 +91,7 @@ router.post('/', isLoggedIn, (req, res) => {
 
 
 // Comment: EDIT - Form to edit a comment
-router.get('/:comment_id/edit', ownsComment, (req, res) => {
+router.get('/:comment_id/edit', middleware.ownsComment, (req, res) => {
   let campgroundID = req.params.id,
       commentID    = req.params.comment_id;
   
@@ -137,7 +138,7 @@ router.get('/:comment_id/edit', ownsComment, (req, res) => {
 });
 
 // Comment: UPDATE - Update a comment (PUT)
-router.put('/:comment_id', ownsComment, (req, res) => {
+router.put('/:comment_id', middleware.ownsComment, (req, res) => {
   let updatedComment = req.body.comment,
       commentID      = req.params.comment_id,
       campgroundID   = req.params.id;
@@ -155,7 +156,7 @@ router.put('/:comment_id', ownsComment, (req, res) => {
 });
 
 // Campground: DESTROY - Remove a campground (DELETE)
-router.delete('/:comment_id', ownsComment, (req, res) => {
+router.delete('/:comment_id', middleware.ownsComment, (req, res) => {
   let commentID    = req.params.comment_id,
       campgroundID = req.params.id;
   
@@ -170,31 +171,5 @@ router.delete('/:comment_id', ownsComment, (req, res) => {
       res.redirect('back');
     });
 });
-
-// Middleware
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()) { return next(); }
-  else { res.redirect('/login'); } 
-}
-
-function ownsComment(req, res, next){
-  if(req.isAuthenticated()){
-    let commentID     = req.params.comment_id,
-        currentUserID = req.user._id;
-
-    Comment.findById(commentID)
-      .then( comment => {
-        if(comment.author.id.equals(currentUserID)){
-          next();
-        }
-        else { res.redirect('back')}
-      })
-      .catch( err => {
-        console.log(err);
-        res.redirect('back'); 
-      });
-  }
-  else { res.redirect('/login'); }
-}
 
 module.exports = router;
