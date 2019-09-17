@@ -8,7 +8,11 @@
     <label for="campground[name]">Name</label>
     <input class="form-control" type="text" name="campground[name]" placeholder="Name" value="<%= campground.name %>" required>
     <label for="campground[image]">Image</label>
-    <input class="form-control" type="text" name="campground[image]" placeholder="Image" value="<%= campground.image %>" required>
+    <input class="form-control" type="url" name="campground[image]" placeholder="Image" value="<%= campground.image %>" required>
+    <label for="campground[price]">Price</label>
+    <input class="form-control" type="number" name="campground[price]" placeholder="Price" value="<%= campground.price %>" step="0.01" required>
+    <label for="campground[websiteURL]">Website URL</label>
+    <input class="form-control" type="url" name="campground[websiteURL]" placeholder="Website URL" value="<%= campground.websiteURL %>" required>
     <label for="campground[description]">Description</label>
     <textarea class="form-control" rows="5" name="campground[description]" required><%= campground.description %></textarea>
     <input class="submit btn btn-success btn-block" type="submit">
