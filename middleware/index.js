@@ -4,7 +4,10 @@ const Campground = require('../models/campground'),
 
 middleware.isLoggedIn = (req, res, next) => {
   if(req.isAuthenticated()) { return next(); }
-  else { res.redirect('/login'); } 
+  else {
+    req.flash('error', 'You need to be logged in to do that.'); 
+    res.redirect('/login'); 
+  } 
 }
 
 middleware.isNotLoggedIn = (req, res, next) => {
@@ -28,7 +31,10 @@ middleware.ownsCampground = (req, res, next) => {
         res.redirect('back'); 
       });
   }
-  else { res.redirect('/login'); }
+  else {
+    req.flash('error', 'You need to be logged in to do that.'); 
+    res.redirect('/login'); 
+  }
 }
 
 middleware.ownsComment = (req, res, next) => {
@@ -48,7 +54,10 @@ middleware.ownsComment = (req, res, next) => {
         res.redirect('back'); 
       });
   }
-  else { res.redirect('/login'); }
+  else {
+    req.flash('error', 'You need to be logged in to do that.'); 
+    res.redirect('/login'); 
+  }
 }
 
 module.exports = middleware;

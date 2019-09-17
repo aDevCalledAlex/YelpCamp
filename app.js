@@ -4,6 +4,7 @@ const express             = require('express'),
       bodyParser          = require('body-parser'),
       rp                  = require('request-promise'),
       methodOverride      = require('method-override'),
+      flash               = require('connect-flash'),
       passport            = require('passport'),
       LocalStrategy       = require('passport-local'),
       mongoose            = require('mongoose')
@@ -36,6 +37,7 @@ app.use(require('express-session')({
   resave : false, // resave and saveUnitialized is copypasta
   saveUninitialized : false
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -43,6 +45,9 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.error       = req.flash('error');
+  res.locals.success     = req.flash('success');
+  res.locals.info        = req.flash('info');
   next();
 });
 app.use("/", indexRoutes);
