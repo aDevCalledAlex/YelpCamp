@@ -27,6 +27,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
                         username : req.user.username
                       },
       newCampground = {...req.body.campground, author};
+  newCampground.description = req.sanitize(newCampground.description);
 
   Campground.create(newCampground)
     .then( campground => {
@@ -63,8 +64,9 @@ router.get('/:id/edit', middleware.ownsCampground, (req, res) => {
 
 // Campground: UPDATE - Update a campground (PUT)
 router.put('/:id', middleware.ownsCampground, (req, res) => {
-  let updatedCampground = req.body.campground,
-      campgroundID      = req.params.id;
+  let updatedCampground         = req.body.campground,
+      campgroundID              = req.params.id;
+  updatedCampground.description = req.sanitize(updatedCampground.description);
 
   Campground.findByIdAndUpdate(campgroundID, updatedCampground)
     .then( () => {

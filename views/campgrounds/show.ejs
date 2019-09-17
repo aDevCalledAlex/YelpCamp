@@ -22,7 +22,7 @@
           <h3 class="card-title"><%= campground.price %>/night</h3>
         </div>
         <div class="content">
-          <p class="card-text"><%= campground.description %></p>
+          <p class="card-text"><%- campground.description %></p>
           <div class="showBottom">
             <p class="card-text"><em>Submitted by <strong><%= campground.author.username %></strong></em></p>
             <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>

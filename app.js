@@ -2,6 +2,7 @@ const express             = require('express'),
       app                 = express(),
       port                = 3000,
       bodyParser          = require('body-parser'),
+      expressSanitizer    = require('express-sanitizer'),
       rp                  = require('request-promise'),
       methodOverride      = require('method-override'),
       flash               = require('connect-flash'),
@@ -29,6 +30,7 @@ mongoose.connect(mongoURI, mongoConnectOptions)
             console.log(err);
           });
 
+app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 app.use(express.static(`${__dirname}/public`)); // for including this folder into the scope (stylesheet/script directory)
 app.use(bodyParser.urlencoded({ extended : true })); // just copypasta, needed to enable bodyParser (populate req.body)

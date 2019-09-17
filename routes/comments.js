@@ -20,7 +20,7 @@ router.get('/new', middleware.isLoggedIn, (req, res) => { // Needs to be below /
 router.post('/', middleware.isLoggedIn, (req, res) => {
   let campgroundID = req.params.id,
       newComment   = {
-                       body : req.body.comment.body,
+                       body : req.sanitize(req.body.comment.body),
                        author : {
                          id : req.user._id,
                          username : req.user.username
@@ -139,9 +139,10 @@ router.get('/:comment_id/edit', middleware.ownsComment, (req, res) => {
 
 // Comment: UPDATE - Update a comment (PUT)
 router.put('/:comment_id', middleware.ownsComment, (req, res) => {
-  let updatedComment = req.body.comment,
-      commentID      = req.params.comment_id,
-      campgroundID   = req.params.id;
+  let updatedComment  = req.body.comment,
+      commentID       = req.params.comment_id,
+      campgroundID    = req.params.id;
+  updatedComment.body = req.sanitize(updatedComment.body);
 
   Comment.findByIdAndUpdate(commentID, updatedComment)
     .then( () => {
