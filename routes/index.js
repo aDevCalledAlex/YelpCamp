@@ -6,12 +6,12 @@ const express    = require('express'),
 
 // Root Route
 router.get('/', (req, res) => {
-  res.render('landing');
+  res.render('index/landing');
 });
 
 // Sign Up Form
 router.get('/register', middleware.isNotLoggedIn, (req, res) => {
-  res.render('users/register');
+  res.render('index/register');
 });
 
 // Sign Up Logic
@@ -34,7 +34,7 @@ router.post('/register', middleware.isNotLoggedIn, (req, res) => {
 
 // Login Form
 router.get('/login', middleware.isNotLoggedIn, (req, res) => {
-  res.render('users/login');
+  res.render('index/login');
 });
 
 // Login Logic
