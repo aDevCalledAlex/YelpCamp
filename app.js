@@ -10,7 +10,7 @@ const dotenv              = require('dotenv').config(),
       passport            = require('passport'),
       LocalStrategy       = require('passport-local'),
       mongoose            = require('mongoose')
-      mongoURI            = `mongodb+srv://${process.env.DB_username}:${process.env.DB_password}@${process.env.DB_hostname}` || 'mongodb://localhost/yelp_camp',
+      mongoURI            = process.env.DB_URL || 'mongodb://localhost/yelp_camp',
       mongoConnectOptions = {
                               useNewUrlParser : true, 
                               useFindAndModify : false, 
@@ -25,6 +25,8 @@ const dotenv              = require('dotenv').config(),
       indexRoutes          = require('./routes/index'),
       campgroundRoutes     = require('./routes/campgrounds'),
       commentRoutes        = require('./routes/comments');
+
+console.log(mongoURI);
 
 mongoose.connect(mongoURI, mongoConnectOptions)
           .catch( err => {
