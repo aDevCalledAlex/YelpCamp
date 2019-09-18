@@ -1,7 +1,7 @@
 const dotenv              = require('dotenv').config(),
       express             = require('express'),
       app                 = express(),
-      port                = 3000,
+      port                = process.env.PORT || 3000,
       bodyParser          = require('body-parser'),
       expressSanitizer    = require('express-sanitizer'),
       rp                  = require('request-promise'),
