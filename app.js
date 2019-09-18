@@ -1,4 +1,5 @@
-const express             = require('express'),
+const dotevn              = require('dotenv').config(),
+      express             = require('express'),
       app                 = express(),
       port                = 3000,
       bodyParser          = require('body-parser'),
@@ -9,7 +10,7 @@ const express             = require('express'),
       passport            = require('passport'),
       LocalStrategy       = require('passport-local'),
       mongoose            = require('mongoose')
-      mongoURI            = `mongodb://localhost/yelp_camp`,
+      mongoURI            = `mongodb+srv://${process.env.DB_username}:${process.env.DB_password}@${process.env.DB_hostname}`,
       mongoConnectOptions = {
                               useNewUrlParser : true, 
                               useFindAndModify : false, 
