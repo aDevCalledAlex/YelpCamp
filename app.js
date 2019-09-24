@@ -28,8 +28,6 @@ const dotenv              = require('dotenv').config(),
       campgroundRoutes     = require('./routes/campgrounds'),
       commentRoutes        = require('./routes/comments');
 
-console.log(mongoURI);
-
 mongoose.connect(mongoURI, mongoConnectOptions)
           .catch( err => { console.log(err); });
 
